@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.skypro.homework.dto.CommentDTO;
 import ru.skypro.homework.dto.CreateCommentDTO;
-import ru.skypro.homework.dto.ResponseWrapperComment;
+import ru.skypro.homework.dto.ResponseWrapper;
 import ru.skypro.homework.entity.Comment;
 import ru.skypro.homework.exception.AdNotFoundException;
 import ru.skypro.homework.mapper.CommentMapper;
@@ -18,7 +18,7 @@ import ru.skypro.homework.repository.UserRepository;
 import ru.skypro.homework.service.CommentService;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Service CommentServiceImpl is the implementation of CommentService
@@ -42,12 +42,10 @@ public class CommentServiceImpl implements CommentService {
 
 
     @Override
-    public ResponseWrapperComment getAllComments(int idAd) {
+    public ResponseWrapper<CommentDTO> getAllComments(int idAd) {
         log.info("getAllComments method");
-        List<Comment> comments = commentRepository.findAllByAdId(idAd);
-        ResponseWrapperComment responseWrapper = new ResponseWrapperComment();
-        responseWrapper.setResults(commentMapper.toCommentsListDto(comments));
-        return responseWrapper;
+        Collection<Comment> comments = commentRepository.findAllByAdId(idAd);
+        return new ResponseWrapper<>(commentMapper.toCommentsListDto(comments));
     }
 
     @Override
