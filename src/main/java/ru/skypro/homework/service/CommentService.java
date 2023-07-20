@@ -3,7 +3,7 @@ package ru.skypro.homework.service;
 import org.springframework.security.core.Authentication;
 import ru.skypro.homework.dto.CommentDTO;
 import ru.skypro.homework.dto.CreateCommentDTO;
-import ru.skypro.homework.dto.ResponseWrapperComment;
+import ru.skypro.homework.dto.ResponseWrapper;
 import ru.skypro.homework.entity.Comment;
 
 /**
@@ -22,7 +22,7 @@ public interface CommentService {
      * @param id identifier ads
      * @return Outputs the response wrapper
      */
-    ResponseWrapperComment getAllComments(int id);
+    ResponseWrapper<CommentDTO> getAllComments(int id);
 
     /**
      * Method outputs the addition of a comment

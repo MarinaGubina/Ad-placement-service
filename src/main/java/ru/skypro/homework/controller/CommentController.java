@@ -14,7 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import ru.skypro.homework.dto.CommentDTO;
 import ru.skypro.homework.dto.CreateCommentDTO;
-import ru.skypro.homework.dto.ResponseWrapperComment;
+import ru.skypro.homework.dto.ResponseWrapper;
 import ru.skypro.homework.service.CommentService;
 
 /**
@@ -42,7 +42,7 @@ public class CommentController {
                             description = "All comments received",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    schema = @Schema(implementation = ResponseWrapperComment.class)
+                                    schema = @Schema(implementation = ResponseWrapper.class)
                             )
                     ),
                     @ApiResponse(
@@ -50,13 +50,13 @@ public class CommentController {
                             description = "All comments not received",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    schema = @Schema(implementation = ResponseWrapperComment.class)
+                                    schema = @Schema(implementation = ResponseWrapper.class)
                             )
                     )
             }
     )
     @GetMapping("{id}/comments")
-    public ResponseEntity<ResponseWrapperComment> getAllComments (@PathVariable int id) {
+    public ResponseEntity<ResponseWrapper<CommentDTO>> getAllComments (@PathVariable int id) {
         return ResponseEntity.ok( commentService.getAllComments(id));
     }
 
